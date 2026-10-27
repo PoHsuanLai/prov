@@ -1,0 +1,32 @@
+[workspace]
+resolver = "3"
+members = ["prov"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+# The toolchain itself is pinned in rust-toolchain.toml; this is the oldest compiler the code is written for.
+rust-version = "1.92"
+repository = "https://github.com/PoHsuanLai/prov"
+# Consumers take prov by git rev, as the rest of the program does.
+publish = false
+
+[workspace.dependencies]
+# porter-core's ids (AppName, DataClass, SpaceId, HelperId...) are prov's vocabulary. It moves in
+# lockstep: this rev is the porter every consumer pins (porter is wave 1, prov wave 1b).
+porter-core = { git = "https://github.com/PoHsuanLai/porter", rev = "dcc16ada850559c7c8ae213cd7a9b153672e5031" }
+
+# Version lines copied from quire's docs/workspace-deps.toml (the program's one pinned block).
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+proptest = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+
+# Dependencies keep no debug info: it is most of what a test link carries.
+[profile.dev.package."*"]
+debug = false
