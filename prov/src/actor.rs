@@ -1,6 +1,7 @@
 //! Who acted. Set by the transport or the daemon, never self-asserted in a request body.
 
 use crate::ids::{ClientName, HelperId, RunId, SessionId, TaskId};
+use crate::slug::slug_enum;
 use porter_core::AppName;
 use porter_core::capability::AgentProgram;
 use serde::{Deserialize, Serialize};
@@ -130,49 +131,30 @@ pub enum SystemPart {
     Cua,
 }
 
-/// An actor without its details: what policy tables and filters key on.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum ActorKind {
-    /// [`Actor::User`].
-    User,
-    /// [`Actor::Companion`] as planner, reader, worker or helper.
-    Companion,
-    /// [`Actor::Companion`] as a computer-use run.
-    Cua,
-    /// [`Actor::Mcp`].
-    Mcp,
-    /// [`Actor::Acp`].
-    Acp,
-    /// [`Actor::Cli`].
-    Cli,
-    /// [`Actor::App`].
-    App,
-    /// [`Actor::ThirdParty`].
-    ThirdParty,
-    /// [`Actor::System`].
-    System,
-    /// [`Actor::Unknown`].
-    Unknown,
-}
-
-impl ActorKind {
-    /// The kind's slug for a span attribute: the same text as its serde form, as a `&'static
-    /// str` (a `tracing` field value must be a constant, which serde cannot give). A test
-    /// pins the two together. This is the one hand-written slug in the repo, kept by that test.
-    pub const fn slug(self) -> &'static str {
-        match self {
-            ActorKind::User => "user",
-            ActorKind::Companion => "companion",
-            ActorKind::Cua => "cua",
-            ActorKind::Mcp => "mcp",
-            ActorKind::Acp => "acp",
-            ActorKind::Cli => "cli",
-            ActorKind::App => "app",
-            ActorKind::ThirdParty => "third_party",
-            ActorKind::System => "system",
-            ActorKind::Unknown => "unknown",
-        }
+slug_enum! {
+    /// An actor without its details: what policy tables and filters key on.
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+    pub enum ActorKind {
+        /// [`Actor::User`].
+        User = "user",
+        /// [`Actor::Companion`] as planner, reader, worker or helper.
+        Companion = "companion",
+        /// [`Actor::Companion`] as a computer-use run.
+        Cua = "cua",
+        /// [`Actor::Mcp`].
+        Mcp = "mcp",
+        /// [`Actor::Acp`].
+        Acp = "acp",
+        /// [`Actor::Cli`].
+        Cli = "cli",
+        /// [`Actor::App`].
+        App = "app",
+        /// [`Actor::ThirdParty`].
+        ThirdParty = "third_party",
+        /// [`Actor::System`].
+        System = "system",
+        /// [`Actor::Unknown`].
+        Unknown = "unknown",
     }
 }
 

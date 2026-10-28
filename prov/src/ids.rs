@@ -1,25 +1,24 @@
 //! The ids agent-side crates share. Slug ids use porter's one id grammar; entity names carry
 //! their own.
 
-use porter_core::{AppName, CoreError, is_id};
+use porter_core::{AppName, is_id};
 use serde::{Deserialize, Serialize};
-use std::fmt;
 
 macro_rules! text_id {
     ($(#[$doc:meta])* $name:ident, $what:literal, $ok:expr) => {
         $(#[$doc])*
-        #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
+        #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, ::serde::Serialize, ::serde::Deserialize)]
         #[serde(try_from = "String", into = "String")]
         pub struct $name(String);
 
         impl $name {
             /// The id written as `text`, or why it is not one.
-            pub fn parse(text: &str) -> Result<Self, CoreError> {
+            pub fn parse(text: &str) -> Result<Self, ::porter_core::CoreError> {
                 let ok: fn(&str) -> bool = $ok;
                 if ok(text) {
                     Ok(Self(text.to_owned()))
                 } else {
-                    Err(CoreError::MalformedId { what: $what, text: text.to_owned() })
+                    Err(::porter_core::CoreError::MalformedId { what: $what, text: text.to_owned() })
                 }
             }
 
@@ -30,8 +29,8 @@ macro_rules! text_id {
         }
 
         impl TryFrom<String> for $name {
-            type Error = CoreError;
-            fn try_from(text: String) -> Result<Self, CoreError> {
+            type Error = ::porter_core::CoreError;
+            fn try_from(text: String) -> Result<Self, ::porter_core::CoreError> {
                 Self::parse(&text)
             }
         }
@@ -42,13 +41,15 @@ macro_rules! text_id {
             }
         }
 
-        impl fmt::Display for $name {
-            fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        impl ::std::fmt::Display for $name {
+            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
                 f.write_str(&self.0)
             }
         }
     };
 }
+
+pub(crate) use text_id;
 
 /// Two or more dot-separated elements, each `[a-z][a-z0-9_]*`.
 fn dotted(text: &str) -> bool {

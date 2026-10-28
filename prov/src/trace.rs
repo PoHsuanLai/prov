@@ -13,48 +13,43 @@
 
 /// Span attribute keys.
 pub mod attr {
-    /// Who acted: a value of `ActorKind::slug()`.
-    pub const ACTOR_KIND: &str = "quire.actor.kind";
-    /// The effect class of an action: a value of `Effect::slug()`.
-    pub const EFFECT: &str = "quire.effect";
-    /// A keyed hash prefix of the `SpaceId`, never the id.
-    pub const SPACE_HASH: &str = "quire.space.hash";
-    /// The companion session.
-    pub const SESSION: &str = "quire.session.id";
-    /// The run.
-    pub const RUN: &str = "quire.run.id";
-    /// The task.
-    pub const TASK: &str = "quire.task.id";
-    /// Where a turn ran: `local`, `lan` or `cloud` (from `ServedBy`).
-    pub const SERVED_LOCALITY: &str = "quire.served.locality";
-    /// The code of a refusal.
-    pub const DENY_CODE: &str = "quire.deny.code";
-    /// The policy ruling.
-    pub const RULING: &str = "quire.policy.ruling";
-    /// How a confirmation ended.
-    pub const CONFIRM_OUTCOME: &str = "quire.confirm.outcome";
-    /// The pipeline stage.
-    pub const STAGE: &str = "quire.pipeline.stage";
-    /// The computer-use step number.
-    pub const CUA_STEP: &str = "quire.cua.step";
-    /// The computer-use mode.
-    pub const CUA_MODE: &str = "quire.cua.mode";
+    /// Declares each key as a constant and lists them all in [`ALL`], from the one list.
+    macro_rules! keys {
+        ($( $(#[$doc:meta])* $name:ident = $value:literal, )+) => {
+            $( $(#[$doc])* pub const $name: &str = $value; )+
 
-    /// Every key above, in declaration order: what a span macro's declared fields are tested
-    /// against.
-    pub const ALL: &[&str] = &[
-        ACTOR_KIND,
-        EFFECT,
-        SPACE_HASH,
-        SESSION,
-        RUN,
-        TASK,
-        SERVED_LOCALITY,
-        DENY_CODE,
-        RULING,
-        CONFIRM_OUTCOME,
-        STAGE,
-        CUA_STEP,
-        CUA_MODE,
-    ];
+            /// Every key above, in declaration order: what a span macro's declared fields are
+            /// tested against.
+            pub const ALL: &[&str] = &[$($name),+];
+        };
+    }
+
+    keys! {
+        /// Who acted: a value of `ActorKind::slug()`.
+        ACTOR_KIND = "quire.actor.kind",
+        /// The effect class of an action: a value of `Effect::slug()`.
+        EFFECT = "quire.effect",
+        /// A keyed hash prefix of the `SpaceId`, never the id.
+        SPACE_HASH = "quire.space.hash",
+        /// The companion session.
+        SESSION = "quire.session.id",
+        /// The run.
+        RUN = "quire.run.id",
+        /// The task.
+        TASK = "quire.task.id",
+        /// Where a turn ran: `local`, `lan` or `cloud` (from `ServedBy`).
+        SERVED_LOCALITY = "quire.served.locality",
+        /// The code of a refusal.
+        DENY_CODE = "quire.deny.code",
+        /// The policy ruling.
+        RULING = "quire.policy.ruling",
+        /// How a confirmation ended.
+        CONFIRM_OUTCOME = "quire.confirm.outcome",
+        /// The pipeline stage.
+        STAGE = "quire.pipeline.stage",
+        /// The computer-use step number.
+        CUA_STEP = "quire.cua.step",
+        /// The computer-use mode.
+        CUA_MODE = "quire.cua.mode",
+    }
 }

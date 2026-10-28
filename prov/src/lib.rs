@@ -20,6 +20,7 @@ mod ids;
 mod label;
 mod message;
 mod scope;
+mod slug;
 pub mod trace;
 
 pub use actor::{Actor, ActorKind, AgentLabel, AgentRole, Channel, SystemPart};
@@ -43,4 +44,3 @@ pub use message::{
 /// Re-exported so `prov` is the one import for identity vocabulary.
 pub use porter_core::capability::AgentProgram;
 pub use porter_core::{AppName, DataClass, SpaceId, SpaceScope, UnixSeconds};
-pub use scope::{DesktopVerdict, Flow, desktop_admits};

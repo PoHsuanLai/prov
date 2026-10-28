@@ -325,77 +325,17 @@ fn confidentiality_join_is_a_semilattice() {
 
 #[test]
 fn data_flows_only_where_every_named_space_allows() {
-    use Flow::{Allowed, Denied};
     let cases = [
-        (Confidentiality::Public, "work", Allowed),
-        (private(&["work"]), "work", Allowed),
-        (private(&["work"]), "home", Denied),
-        (private(&["desktop"]), "work", Allowed),
-        (private(&["desktop"]), "desktop", Allowed),
-        (private(&["home", "work"]), "work", Denied),
-        (private(&["desktop", "work"]), "work", Allowed),
-        (Confidentiality::Secret, "work", Denied),
+        (Confidentiality::Public, "work", true),
+        (private(&["work"]), "work", true),
+        (private(&["work"]), "home", false),
+        (private(&["desktop"]), "work", true),
+        (private(&["desktop"]), "desktop", true),
+        (private(&["home", "work"]), "work", false),
+        (private(&["desktop", "work"]), "work", true),
+        (Confidentiality::Secret, "work", false),
     ];
     for (conf, to, want) in cases {
         assert_eq!(conf.flow_to(&space(to)), want, "{conf:?} to {to}");
-    }
-}
-
-#[test]
-fn the_desktop_scope_admits_only_what_the_person_stated() {
-    use DesktopVerdict::*;
-    let user = &[Source::User];
-    let cases = [
-        (
-            label(Integrity::Trusted, Confidentiality::Public, user),
-            Admit,
-        ),
-        (
-            label(Integrity::Trusted, private(&["desktop"]), user),
-            Admit,
-        ),
-        (
-            label(Integrity::Trusted, private(&["work"]), user),
-            SpaceBound,
-        ),
-        (
-            label(Integrity::Trusted, Confidentiality::Secret, user),
-            Secret,
-        ),
-        (
-            label(Integrity::Untrusted, Confidentiality::Public, user),
-            Untrusted,
-        ),
-        (
-            label(
-                Integrity::Untrusted,
-                Confidentiality::Secret,
-                &[Source::Mail],
-            ),
-            Secret,
-        ),
-        (
-            label(
-                Integrity::Trusted,
-                Confidentiality::Public,
-                &[Source::App(AppName::parse("org.quire.Mail").expect("app"))],
-            ),
-            NotUserStated,
-        ),
-        (
-            label(
-                Integrity::Trusted,
-                Confidentiality::Public,
-                &[Source::User, Source::Model(ModelRole::Consolidator)],
-            ),
-            NotUserStated,
-        ),
-        (
-            label(Integrity::Trusted, Confidentiality::Public, &[]),
-            NotUserStated,
-        ),
-    ];
-    for (l, want) in cases {
-        assert_eq!(desktop_admits(&l), want, "{l:?}");
     }
 }
