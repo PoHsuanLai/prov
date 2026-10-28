@@ -1,7 +1,8 @@
 //! The ids agent-side crates share. Slug ids use porter's one id grammar; entity names carry
 //! their own.
 
-use porter_core::{AppName, is_id};
+use porter_core::AppName;
+use porter_ids::is_id;
 use serde::{Deserialize, Serialize};
 
 macro_rules! text_id {

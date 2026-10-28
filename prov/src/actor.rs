@@ -2,8 +2,8 @@
 
 use crate::ids::{ClientName, HelperId, RunId, SessionId, TaskId};
 use crate::slug::slug_enum;
+use porter_capability::AgentProgram;
 use porter_core::AppName;
-use porter_core::capability::AgentProgram;
 use serde::{Deserialize, Serialize};
 
 /// The party that did something: one type for the undo journal, the eventlog and the audit.

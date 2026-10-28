@@ -221,19 +221,39 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
 
 [[package]]
+name = "porter-capability"
+version = "0.1.0"
+source = "git+https://github.com/PoHsuanLai/porter?rev=31799cfa9a355df8f57af99a2f060a65c980601d#31799cfa9a355df8f57af99a2f060a65c980601d"
+dependencies = [
+ "porter-ids",
+ "serde",
+]
+
+[[package]]
 name = "porter-core"
 version = "0.1.0"
-source = "git+https://github.com/PoHsuanLai/porter?rev=f7e47a71ac30ab46dd0629fc8c2b2ae9cfcae261#f7e47a71ac30ab46dd0629fc8c2b2ae9cfcae261"
+source = "git+https://github.com/PoHsuanLai/porter?rev=31799cfa9a355df8f57af99a2f060a65c980601d#31799cfa9a355df8f57af99a2f060a65c980601d"
 dependencies = [
- "chrono",
  "peephole-core",
- "percent-encoding",
+ "porter-capability",
+ "porter-ids",
  "secrecy",
  "serde",
  "serde_json",
  "subtle",
  "thiserror",
  "zeroize",
+]
+
+[[package]]
+name = "porter-ids"
+version = "0.1.0"
+source = "git+https://github.com/PoHsuanLai/porter?rev=31799cfa9a355df8f57af99a2f060a65c980601d#31799cfa9a355df8f57af99a2f060a65c980601d"
+dependencies = [
+ "chrono",
+ "percent-encoding",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -278,7 +298,9 @@ dependencies = [
 name = "prov"
 version = "0.1.0"
 dependencies = [
+ "porter-capability",
  "porter-core",
+ "porter-ids",
  "proptest",
  "serde",
  "serde_json",

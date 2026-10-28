@@ -241,7 +241,8 @@ impl ReaderKey {
 mod tests {
     use super::*;
     use crate::consent::{ConfirmId, ConfirmReceipt, InputProof, Witness, declassify, endorse};
-    use porter_core::{AppName, UnixSeconds};
+    use porter_core::AppName;
+    use porter_ids::UnixSeconds;
     use proptest::prelude::*;
 
     fn space(id: &str) -> SpaceId {

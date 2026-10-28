@@ -2,7 +2,7 @@
 
 use crate::ids::text_id;
 use crate::label::{Confidentiality, Integrity, Labelled, Source};
-use porter_core::{UnixSeconds, is_id};
+use porter_ids::{UnixSeconds, is_id};
 use serde::{Deserialize, Serialize};
 
 text_id!(

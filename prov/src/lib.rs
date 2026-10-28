@@ -42,5 +42,6 @@ pub use message::{
     SenderCheck,
 };
 /// Re-exported so `prov` is the one import for identity vocabulary.
-pub use porter_core::capability::AgentProgram;
-pub use porter_core::{AppName, DataClass, SpaceId, SpaceScope, UnixSeconds};
+pub use porter_capability::AgentProgram;
+pub use porter_core::{AppName, DataClass, SpaceId, SpaceScope};
+pub use porter_ids::UnixSeconds;
