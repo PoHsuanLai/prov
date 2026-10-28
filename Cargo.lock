@@ -223,7 +223,7 @@ checksum = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
 [[package]]
 name = "porter-capability"
 version = "0.1.0"
-source = "git+https://github.com/PoHsuanLai/porter?rev=0b68a6a94cd274363f5db357e5e0b43276725c82#0b68a6a94cd274363f5db357e5e0b43276725c82"
+source = "git+https://github.com/PoHsuanLai/porter?rev=43ed7a6a2ad74719973f60493c59606c855b3145#43ed7a6a2ad74719973f60493c59606c855b3145"
 dependencies = [
  "porter-ids",
  "serde",
@@ -232,7 +232,7 @@ dependencies = [
 [[package]]
 name = "porter-core"
 version = "0.1.0"
-source = "git+https://github.com/PoHsuanLai/porter?rev=0b68a6a94cd274363f5db357e5e0b43276725c82#0b68a6a94cd274363f5db357e5e0b43276725c82"
+source = "git+https://github.com/PoHsuanLai/porter?rev=43ed7a6a2ad74719973f60493c59606c855b3145#43ed7a6a2ad74719973f60493c59606c855b3145"
 dependencies = [
  "peephole-core",
  "porter-capability",
@@ -248,7 +248,7 @@ dependencies = [
 [[package]]
 name = "porter-ids"
 version = "0.1.0"
-source = "git+https://github.com/PoHsuanLai/porter?rev=0b68a6a94cd274363f5db357e5e0b43276725c82#0b68a6a94cd274363f5db357e5e0b43276725c82"
+source = "git+https://github.com/PoHsuanLai/porter?rev=43ed7a6a2ad74719973f60493c59606c855b3145#43ed7a6a2ad74719973f60493c59606c855b3145"
 dependencies = [
  "chrono",
  "percent-encoding",
