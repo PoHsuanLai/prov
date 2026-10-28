@@ -15,9 +15,9 @@ publish = false
 [workspace.dependencies]
 # porter-core's ids (AppName, DataClass, SpaceId, HelperId...) are prov's vocabulary. It moves in
 # lockstep: this rev is the porter every consumer pins (porter is wave 1, prov wave 1b).
-porter-core     = { git = "https://github.com/PoHsuanLai/porter", rev = "31799cfa9a355df8f57af99a2f060a65c980601d" }
-porter-ids      = { git = "https://github.com/PoHsuanLai/porter", rev = "31799cfa9a355df8f57af99a2f060a65c980601d" }
-porter-capability = { git = "https://github.com/PoHsuanLai/porter", rev = "31799cfa9a355df8f57af99a2f060a65c980601d" }
+porter-core     = { git = "https://github.com/PoHsuanLai/porter", rev = "0b68a6a94cd274363f5db357e5e0b43276725c82" }
+porter-ids      = { git = "https://github.com/PoHsuanLai/porter", rev = "0b68a6a94cd274363f5db357e5e0b43276725c82" }
+porter-capability = { git = "https://github.com/PoHsuanLai/porter", rev = "0b68a6a94cd274363f5db357e5e0b43276725c82" }
 
 # Version lines copied from quire's docs/workspace-deps.toml (the program's one pinned block).
 thiserror = "2"
